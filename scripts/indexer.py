@@ -3,13 +3,16 @@ import chromadb
 import os
 
 # 1. Initialize the ChromaDB Client
-# This will create a local folder called 'chroma_db'
-db_path = os.path.join(os.getcwd(), "data/chroma_db")
+# This finds the 'scripts' folder, then goes up one level to find 'data'
+current_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.abspath(os.path.join(current_dir, "..", "data", "chroma_db"))
+log_file = os.path.abspath(os.path.join(current_dir, "..", "data", "synthetic_logs.jsonl"))
+
 client = chromadb.PersistentClient(path=db_path)
 
 # 2. Create a collection ( like a table in a database)
 # Using the default embedding model that comes with ChromaDB
-collection = client.get_or_create_collection(name="robot_failures")
+collection = client.get_or_create_collection(name="robot_logs")
 
 def index_logs():
     log_file = "data/synthetic_logs.jsonl"
