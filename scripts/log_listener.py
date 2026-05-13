@@ -9,7 +9,6 @@ class CopilotListener(Node):
         super().__init__('copilot_listener')
         
         # 1. Connect to your existing ChromaDB using a relative path
-        # Finds the folder where this script lives, then goes up one level to 'data'
         script_dir = os.path.dirname(os.path.abspath(__file__))
         db_path = os.path.join(script_dir, "..", "data", "chroma_db")
         
